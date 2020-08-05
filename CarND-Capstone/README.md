@@ -3,7 +3,7 @@
 This is the project repo for the final project of the Udacity Self-Driving Car Nanodegree: Programming a Real Self-Driving Car. For more information about the project, see the project introduction [here](https://classroom.udacity.com/nanodegrees/nd013/parts/6047fe34-d93c-4f50-8336-b70ef10cb4b2/modules/e1a23b06-329a-4684-a717-ad476f0d8dff/lessons/462c933d-9f24-42d3-8bdc-a08a5fc866e4/concepts/5ab4b122-83e6-436d-850f-9f4d26627fd9).
 
 
-## Team "Siddharth
+## Team "Siddharth"
 | Name                | E-Mail                      |
 | ------------------- | --------------------------- |
 | Siddharth Golecha   | siddharthgolecha4@gmail.com |
@@ -12,7 +12,7 @@ This is the project repo for the final project of the Udacity Self-Driving Car N
 
 ## Introduction
 
-The team designed an autonomous car that will be tested on the simulator and, then, on Udacity’s real self-driving car (Carla). As introduced in the Udacity walkthrough videos, the project is organized in three parts:
+I designed an autonomous car that will be tested on the simulator and, then, on Udacity’s real self-driving car (Carla). As introduced in the Udacity walkthrough videos, the project is organized in three parts:
 - the Waypoint Updater;
 - the Drive-By-Wire (DBW);
 - the Traffic Light Detection.
@@ -70,7 +70,7 @@ Predictive Steering is implemented using the provided `YawController` class ([ya
 ### Throttle
 Throttle is controlled by a speed control algorithm ([An Intelligent Vehicle Based on an Improved PID Speed Control Algorithm for
 Driving Trend Graphs ](http://ijssst.info/Vol-17/No-30/paper19.pdf)  passing in the square difference between the proposed velocity (`linear_vel`) and the current velocity (`current_vel`) divided by 2 times the distance of 30 meters.
-The positive value that returns this algorithm are the throttle values of the car. We smooth the final values of throttle implementing these lines of code:
+The positive value that returns this algorithm are the throttle values of the car. I smooth the final values of throttle implementing these lines of code:
 ```
 if (throttle > 0.05) and (throttle - self.last_throttle) > 0.005:
   throttle = max((self.last_throttle + 0.0025), 0.005)
@@ -85,7 +85,7 @@ decel = max((smooth_acc * 5), self.decel_limit)
 brake = abs(decel) * self.vehicle_mass * self.wheel_radius # Torque N*m
 ```
 `brake` is the amount of torque that is applied to the brake system to decrease the car's speed.
-As we did for throttle, we smooth the final values of brake to increment the comfort and avoid excessive variation of acceleration.
+As I did for throttle, I smooth the final values of brake to increment the comfort and avoid excessive variation of acceleration.
 
 
 ## Traffic Light Detection
@@ -95,7 +95,7 @@ This node is implemented in the [tl_detector.py](/ros/src/tl_detection/tl_detect
 
 ### Classifier setup
 
-We used image classification (so not object detection) to classify images that contain a red, green, yellow or no traffic light.
+I used the image classification (so not object detection) to classify images that contain a red, green, yellow or no traffic light.
 
 The current setup uses Tensorflow-GPU 1.3 and Keras 2.0.8. Classic models that are available in the Keras applications library were used for transfer learning.
 
@@ -125,7 +125,7 @@ The details can be found in [last_layer.ipynb](/train/last_layer.ipynb)
 
 The config file [config.json](/train/config.json) describes which network is trained (the other parameters are defined in the Jupyter notebook)
 
-The initial code came from https://github.com/Gogul09/flower-recognition/blob/master/extract_features.py, but was altered, bug fixed and extended by ourselves for our application.
+The initial code came from https://github.com/Gogul09/flower-recognition/blob/master/extract_features.py, but was altered, bug fixed and extended by myself for my application.
 
 MobileNet, InceptionV3 and XCeption were used as well, but the results were worse or similar.
 
@@ -149,7 +149,7 @@ The JSON files are then processed off-line in [group_files_with_light_state.ipyn
 Seven sets of images were used:
 
 - The images provided by the ROS bag file from Udacity
-- 6 sets of images from MPEG recordings from other team runs:
+- 6 sets of images from MPEG recordings from other runs:
   - https://www.youtube.com/watch?v=V8U5_2SFdJs
   - https://www.youtube.com/watch?v=1TjhlsXzrqU
   - https://www.youtube.com/watch?v=fGNzEqoeZtY
@@ -172,18 +172,18 @@ The notebook [prune_files.ipynb](/train/prune_files.ipynb) was then used to bala
 
 The traffic light classifiers are implemented in [tl_classifier.py](/ros/src/tl_detection/light_classifier/tl_classifier.py) for the simulator and [tl_classifier_site.py](/ros/src/tl_detection/light_classifier/tl_classifier_site.py) for the parking lot.
 
-The classifier for the simulator performs well, so that we can use a probability threshold of 0.9 to decide if the network's prediction is reliable or not.
+The classifier for the simulator performs well, so that I can use a probability threshold of 0.9 to decide if the network's prediction is reliable or not.
 
 The classifier for the site / parking lot performs not so well for green light detection (10% miss-classification on a test set without any probability thresholding),  so a probability threshold of 0.8 is used for this classifier and even no threshold at all in case of a predicted green light.
 
 ### Other techniques
 
-First off, a similar approach (transfer learning) was tried out using pre-trained models from Tensorflow-Hub. This was implemented in [retrain.ipynb](/train/retrain.ipynb). Unfortunately, we found out that the models trained with Tensorflow 1.5 are not backward compatible, so they could not be used in Tensorflow 1.3
+First off, a similar approach (transfer learning) was tried out using pre-trained models from Tensorflow-Hub. This was implemented in [retrain.ipynb](/train/retrain.ipynb). Unfortunately, I found out that the models trained with Tensorflow 1.5 are not backward compatible, so they could not be used in Tensorflow 1.3
 
-Also, a lot of project teams are using object detection. We decided to go for image classification, because:
+Also, a lot of project teams are using object detection. I decided to go for image classification, because:
 
-- It's easier to automatically annotate/label the images. Otherwise, bounding boxes around traffic lights had to be drawn. In the meanwhile, we found out that a tool like Vatic (https://github.com/cvondrick/vatic) could help a lot, because bounding boxes could be interpolated just using a couple of reference images.
-- Image classification is a lot faster than object detection. We don't have to skip any images, because inference is happening at 16 Hz on the workspace. We assume that the GPU in Carla is performing a lot better, so even if images come in at a higher frequency than in the simulator, this won't cause problems.
+- It's easier to automatically annotate/label the images. Otherwise, bounding boxes around traffic lights had to be drawn. In the meanwhile, I found out that a tool like Vatic (https://github.com/cvondrick/vatic) could help a lot, because bounding boxes could be interpolated just using a couple of reference images.
+- Image classification is a lot faster than object detection. I don't have to skip any images, because inference is happening at 16 Hz on the workspace. I assumed that the GPU in Carla is performing a lot better, so even if images come in at a higher frequency than in the simulator, this won't cause problems.
 - Well ... it's not really a challenge to mimic what other project teams do :)
 
 ## Setup
