@@ -19,6 +19,8 @@ I designed an autonomous car that will be tested on the simulator and, then, on 
 
 ![overview](./imgs/final-project-ros-graph-v2.png "")
 
+The video is also recorded of the project in automatic mode and it is stored by the name of Recording.mp4. 
+
 
 ## Waypoint Updater
 
